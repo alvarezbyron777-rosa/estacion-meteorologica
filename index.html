@@ -141,7 +141,8 @@
       .config button{width:100%}
       main{padding:0 12px}
     }
-  </style>
+  .connection{display:flex;flex-wrap:wrap;gap:12px;background:white;padding:18px;border-radius:16px;margin-bottom:12px}.connection label{flex:1;min-width:180px;font-size:13px;color:var(--muted)}.connection input{display:block;width:100%;padding:11px;margin-top:6px;border:1px solid var(--line);border-radius:8px}.connection button{align-self:end}.notice{padding:14px 18px;border-radius:12px;background:#eaf2ff;color:#174779;margin:16px 0}.notice.danger{background:#fee2e2;color:#991b1b}.badge{display:inline-block;margin-top:12px;padding:6px 10px;border-radius:8px;font-size:12px;background:#edf2f7}.badge.good{background:#dcfce7;color:#166534}.badge.warn{background:#ffedd5;color:#9a3412}.badge.danger{background:#fee2e2;color:#991b1b}.card.stale{opacity:.6}@media(max-width:650px){.mission-bar{flex-direction:column;align-items:flex-start}.value{font-size:30px}}
+</style>
 </head>
 <body>
 
@@ -168,189 +169,13 @@
       </div>
     </div>
 
-    <section class="grid">
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Temperatura</div>
-        <div class="icon">🌡️</div>
-      </div>
-      <div class="value"><span id="v0">--</span> <span class="unit">°C</span></div>
-      <div class="pin">Blynk V0 · DHT22</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Humedad</div>
-        <div class="icon">💧</div>
-      </div>
-      <div class="value"><span id="v1">--</span> <span class="unit">%</span></div>
-      <div class="pin">Blynk V1 · DHT22</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Presión atmosférica</div>
-        <div class="icon">🌬️</div>
-      </div>
-      <div class="value"><span id="v5">--</span> <span class="unit">hPa</span></div>
-      <div class="pin">Blynk V5 · BME280</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Altitud</div>
-        <div class="icon">⛰️</div>
-      </div>
-      <div class="value"><span id="v6">--</span> <span class="unit">m</span></div>
-      <div class="pin">Blynk V6 · BME280</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Distancia</div>
-        <div class="icon">📏</div>
-      </div>
-      <div class="value"><span id="v2">--</span> <span class="unit">cm</span></div>
-      <div class="pin">Blynk V2 · HC-SR04</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Luminosidad</div>
-        <div class="icon">☀️</div>
-      </div>
-      <div id="lightState" class="light">Esperando dato...</div>
-      <div class="pin" style="margin-top:12px">Blynk V7 · LDR digital</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Actualización</div>
-        <div class="icon">🕐</div>
-      </div>
-      <div class="value" style="font-size:25px" id="lastUpdate">--:--:--</div>
-      <div class="pin">Lectura de Blynk Cloud</div>
-    </article>
-
-    <article class="card">
-      <div class="card-head">
-        <div class="label">Estado del sistema</div>
-        <div class="icon">📡</div>
-      </div>
-      <div class="value" style="font-size:24px" id="systemState">Desconectado</div>
-      <div class="pin">Consulta automática cada 2 segundos</div>
-    </article>
-  </section>
-
-  <h2 class="section-title">📊 Historial de lecturas</h2>
-  <section class="charts">
-    <div class="chart-card">
-      <strong>Temperatura</strong>
-      <canvas id="tempChart"></canvas>
-    </div>
-    <div class="chart-card">
-      <strong>Humedad</strong>
-      <canvas id="humChart"></canvas>
-    </div>
-  </section>
-
+<form id="connectionForm" class="connection"><label>Servidor Blynk<input id="server" value="blynk.cloud" required></label><label>Token de tu dispositivo<input id="tokenInput" type="password" placeholder="Pega tu Auth Token" required autocomplete="off"></label><button>Conectar</button><button type="button" id="demo">Ver demostración</button></form><p class="note">El token se usa solo durante esta sesión; no se guarda en el archivo. Introduce el servidor que aparece en tu consola Blynk.</p><div id="message" class="notice" role="status">Configura la conexión o abre la demostración.</div><section class="grid"><article class="card"><div class="card-head"><div class="label">Temperatura</div><div class="icon">🌡️</div></div><div class="value"><span id="v0">--</span> <span class="unit">°C</span></div><div class="pin">Blynk V0 · DHT22</div></article><article class="card"><div class="card-head"><div class="label">Humedad</div><div class="icon">💧</div></div><div class="value"><span id="v1">--</span> <span class="unit">%</span></div><div class="pin">Blynk V1 · DHT22</div></article><article class="card"><div class="card-head"><div class="label">Presión atmosférica</div><div class="icon">🌬️</div></div><div class="value"><span id="v2">--</span> <span class="unit">hPa</span></div><div class="pin">Blynk V2 · BMP280 / BME280</div></article><article class="card"><div class="card-head"><div class="label">Altitud estimada</div><div class="icon">⛰️</div></div><div class="value"><span id="v3">--</span> <span class="unit">m</span></div><div class="pin">Blynk V3 · BMP280 / BME280</div></article><article class="card"><div class="card-head"><div class="label">Respuesta del aire</div><div class="icon">🫧</div></div><div class="value"><span id="v4">--</span> <span class="unit">%</span></div><div class="pin">Blynk V4 · MQ135 · aumento respecto a referencia</div><div class="badge" id="state-v4">Esperando lectura</div></article><article class="card"><div class="card-head"><div class="label">Radiación UV</div><div class="icon">☀️</div></div><div class="value"><span id="v6">--</span> <span class="unit">UVI aprox.</span></div><div class="pin">Blynk V6 · GUVA-S12SD</div><div class="badge" id="state-v6">Esperando lectura</div></article><article class="card"><div class="card-head"><div class="label">Iluminación</div><div class="icon">💡</div></div><div class="value"><span id="v7">--</span> <span class="unit">lux</span></div><div class="pin">Blynk V7 · BH1750</div><div class="badge" id="state-v7">Esperando lectura</div></article><article class="card"><div class="label">Estado del sistema</div><div id="systemState" class="value" style="font-size:22px">Sin conexión</div><div class="pin">Última consulta: <span id="lastUpdate">--</span></div><div class="pin">Consulta automática cada 2 segundos</div></article></section><p class="note" style="margin-top:16px">MQ135: variación de señal, no AQI ni ppm. Alerta experimental ≥50%; se desactiva ≤30%. UV: índice aproximado. BH1750: iluminancia en lux.</p><h2 class="section-title">📊 Variación de los sensores</h2><p class="note">Últimas 60 consultas de esta sesión. Los datos se borran al recargar la página.</p><section class="charts"><div class="chart-card"><strong>Temperatura</strong><canvas id="chart-v0" aria-label="Gráfica de Temperatura"></canvas></div><div class="chart-card"><strong>Humedad</strong><canvas id="chart-v1" aria-label="Gráfica de Humedad"></canvas></div><div class="chart-card"><strong>Presión atmosférica</strong><canvas id="chart-v2" aria-label="Gráfica de Presión atmosférica"></canvas></div><div class="chart-card"><strong>Altitud estimada</strong><canvas id="chart-v3" aria-label="Gráfica de Altitud estimada"></canvas></div><div class="chart-card"><strong>Respuesta del aire</strong><canvas id="chart-v4" aria-label="Gráfica de Respuesta del aire"></canvas></div><div class="chart-card"><strong>Radiación UV</strong><canvas id="chart-v6" aria-label="Gráfica de Radiación UV"></canvas></div><div class="chart-card"><strong>Iluminación</strong><canvas id="chart-v7" aria-label="Gráfica de Iluminación"></canvas></div></section>
   <p class="footer">
     ESP32 → Blynk Cloud → Dashboard web · Los datos se actualizan automáticamente.
   </p>
 </main>
 
 <script>
-  const API = "https://blynk.cloud/external/api/getAll";
-  let token = "NOFYjv5bXJJN8QnVuskfEms6bMj55tgb";
-  let timer = null;
-  const history = {temp:[], hum:[], labels:[]};
-  const MAX_POINTS = 30;
-
-  function conectar(){
-    token = "NOFYjv5bXJJN8QnVuskfEms6bMj55tgb";
-    if(timer) clearInterval(timer);
-    leerBlynk();
-    timer = setInterval(leerBlynk, 2000);
-  }
-
-  async function leerBlynk(){
-    if(!token) return;
-
-    try{
-      const respuesta = await fetch(API + "?token=" + encodeURIComponent(token) + "&_=" + Date.now(), {
-        cache: "no-store"
-      });
-
-      if(!respuesta.ok) throw new Error("HTTP " + respuesta.status);
-
-      const datos = await respuesta.json();
-
-      // Blynk devuelve los virtual pins como v0, v1, v2...
-      const temp = numero(datos.v0);
-      const hum  = numero(datos.v1);
-      const dist = numero(datos.v2);
-      const pres = numero(datos.v5);
-      const alt  = numero(datos.v6);
-      const ldr  = numero(datos.v7);
-
-      mostrar("v0", temp, 1);
-      mostrar("v1", hum, 1);
-      mostrar("v2", dist, 1);
-      mostrar("v5", pres, 1);
-      mostrar("v6", alt, 1);
-
-      if(ldr !== null){
-        const estado = document.getElementById("lightState");
-        if(ldr === 0){
-          estado.textContent = "☀️ Hay luz";
-          estado.className = "light";
-        }else{
-          estado.textContent = "🌙 Poca luz";
-          estado.className = "light dark";
-        }
-      }
-
-      const ahora = new Date();
-      document.getElementById("lastUpdate").textContent =
-        ahora.toLocaleTimeString("es-EC");
-      document.getElementById("systemState").textContent = "Conectado";
-
-      document.getElementById("statusDot").className = "dot ok";
-      document.getElementById("statusText").textContent = "Blynk conectado";
-
-      if(temp !== null && hum !== null){
-        history.temp.push(temp);
-        history.hum.push(hum);
-        history.labels.push(ahora.toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit",second:"2-digit"}));
-
-        if(history.temp.length > MAX_POINTS){
-          history.temp.shift();
-          history.hum.shift();
-          history.labels.shift();
-        }
-        dibujarGrafica("tempChart", history.temp, history.labels, "°C");
-        dibujarGrafica("humChart", history.hum, history.labels, "%");
-      }
-
-    }catch(error){
-      document.getElementById("statusDot").className = "dot bad";
-      document.getElementById("statusText").textContent = "Sin respuesta";
-      document.getElementById("systemState").textContent = "Error de conexión";
-      console.error(error);
-    }
-  }
-
-  function numero(x){
-    if(x === undefined || x === null || x === "") return null;
-    const n = Number(x);
-    return Number.isFinite(n) ? n : null;
-  }
-
-  function mostrar(id, valor, decimales){
-    document.getElementById(id).textContent =
-      valor === null ? "--" : valor.toFixed(decimales);
-  }
-
   function dibujarGrafica(id, valores, etiquetas, unidad){
     const canvas = document.getElementById(id);
     const ctx = canvas.getContext("2d");
@@ -363,9 +188,9 @@
 
     ctx.clearRect(0,0,W,H);
 
-    if(valores.length < 2) return;
+    if(valores.length < 2){ctx.fillStyle='#718096';ctx.font='13px Segoe UI';ctx.fillText('Esperando más lecturas…',20,40);return;}
 
-    const pad = {l:42,r:12,t:20,b:30};
+    const pad = {l:85,r:12,t:20,b:30};
     const pw = W-pad.l-pad.r;
     const ph = H-pad.t-pad.b;
 
@@ -414,14 +239,44 @@
     }
   }
 
-  window.addEventListener("load", conectar);
-
-  window.addEventListener("resize", ()=>{
-    if(history.temp.length > 1){
-      dibujarGrafica("tempChart", history.temp, history.labels, "°C");
-      dibujarGrafica("humChart", history.hum, history.labels, "%");
-    }
-  });
+const SENSORS = [{"pin": "v0", "unit": "°C", "dec": 1}, {"pin": "v1", "unit": "%", "dec": 1}, {"pin": "v2", "unit": "hPa", "dec": 1}, {"pin": "v3", "unit": "m", "dec": 1}, {"pin": "v4", "unit": "%", "dec": 1}, {"pin": "v6", "unit": "UVI aprox.", "dec": 2}, {"pin": "v7", "unit": "lux", "dec": 1}];
+let token='', server='', timer=null, generation=0, alarm=false;
+const series=Object.fromEntries(SENSORS.map(s=>[s.pin,{values:[],labels:[]} ]));
+const el=id=>document.getElementById(id);
+function status(text,ok=false){el('statusText').textContent=text;el('statusDot').className='dot '+(ok?'ok':'bad');el('systemState').textContent=text;}
+function notice(text,danger=false){el('message').textContent=text;el('message').className='notice'+(danger?' danger':'');}
+function numero(x){if(Array.isArray(x))x=x[0];if(x===undefined||x===null||typeof x==='boolean'||String(x).trim()==='')return null;const n=Number(x);return Number.isFinite(n)?n:null;}
+function badge(pin,text,kind=''){el('state-'+pin).textContent=text;el('state-'+pin).className='badge '+kind;}
+function render(data,online,demo=false){
+ const now=new Date().toLocaleTimeString('es-EC',{timeZone:'America/Guayaquil'});
+ for(const s of SENSORS){const n=numero(data[s.pin]);el(s.pin).textContent=n===null?'--':n.toFixed(s.dec);el(s.pin).closest('.card').classList.toggle('stale',!online);const h=series[s.pin];h.values.push(online?n:null);h.labels.push(now);if(h.values.length>60){h.values.shift();h.labels.shift();}}
+ const mq=numero(data.v4),uv=numero(data.v6),lux=numero(data.v7);
+ if(!online){status('ESP32 desconectado');notice('Blynk responde, pero el ESP32 está desconectado. Los valores visibles son las últimas lecturas guardadas.');for(const pin of ['v4','v6','v7'])badge(pin,'Lectura anterior');}
+ else {
+ status(demo?'Demostración · datos simulados':'ESP32 conectado',true);
+ if(mq===null){alarm=false;badge('v4','Esperando referencia');}
+ else{if(mq>=50)alarm=true;else if(mq<=30)alarm=false;badge('v4',alarm?'⚠ Posible gas / contaminación':mq>30?'Señal elevada':'Sin aumento importante',alarm?'danger':mq>30?'warn':'good');}
+ badge('v6',uv===null?'Sin lectura':uv<3?'Nivel bajo':uv<6?'Nivel moderado':uv<8?'Nivel alto':uv<11?'Nivel muy alto':'Nivel extremo',uv===null?'':uv<3?'good':uv<6?'warn':'danger');
+ badge('v7',lux===null?'Sin lectura':lux<10?'Muy poca luz':lux<100?'Iluminación baja':lux<1000?'Iluminación media':'Iluminación alta',lux===null?'':lux<100?'warn':'good');
+ notice((demo?'DEMOSTRACIÓN — valores simulados. ':'')+(alarm?'⚠ ALERTA EXPERIMENTAL: aumento de señal del MQ135.':mq===null?'Esperando lectura MQ135: el código necesita aproximadamente 5 min 30 s para preparar su referencia.':'Lecturas disponibles. El MQ135 muestra cambios respecto a su referencia.'),alarm);
+ }
+ el('lastUpdate').textContent=now;redraw();
+}
+function redraw(){for(const s of SENSORS){const h=series[s.pin];draw('chart-'+s.pin,h.values,h.labels,s.unit);}}
+function draw(id,values,labels,unit){const canvas=el(id);if(values.some(v=>v!==null)){
+ // Mantiene huecos en el historial cuando falta un dato.
+ const valid=values.filter(v=>v!==null);const ctx=canvas.getContext('2d');const W=canvas.clientWidth,H=canvas.clientHeight,dpr=window.devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+ const pad={l:85,r:15,t:25,b:30},pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;let min=Math.min(...valid),max=Math.max(...valid);if(min===max){min-=1;max+=1;}const extra=(max-min)*.15;min-=extra;max+=extra;ctx.font='11px Segoe UI';
+ for(let i=0;i<5;i++){const y=pad.t+ph*i/4;ctx.strokeStyle='#e7ecf3';ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#718096';ctx.fillText((max-(max-min)*i/4).toFixed(1)+' '+unit,3,y+4);}
+ ctx.strokeStyle='#2563eb';ctx.lineWidth=2.5;ctx.beginPath();let gap=true;values.forEach((v,i)=>{if(v===null){gap=true;return;}const x=pad.l+pw*i/Math.max(1,values.length-1),y=pad.t+ph*(1-(v-min)/(max-min));if(gap)ctx.moveTo(x,y);else ctx.lineTo(x,y);gap=false;});ctx.stroke();
+ values.forEach((v,i)=>{if(v===null)return;ctx.beginPath();ctx.arc(pad.l+pw*i/Math.max(1,values.length-1),pad.t+ph*(1-(v-min)/(max-min)),2.5,0,Math.PI*2);ctx.fillStyle='#2563eb';ctx.fill();});ctx.fillStyle='#718096';ctx.fillText(labels[0]||'',pad.l,H-8);ctx.fillText(labels.at(-1)||'',W-75,H-8);
+ }else dibujarGrafica(id,[],[],unit);}
+async function api(endpoint){const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),8000);try{const r=await fetch('https://'+server+'/external/api/'+endpoint+'?token='+encodeURIComponent(token),{cache:'no-store',signal:controller.signal});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(d&&d.error)throw new Error('Blynk rechazó la consulta');return d;}finally{clearTimeout(timeout);}}
+async function poll(g){try{const [data,online]=await Promise.all([api('getAll'),api('isHardwareConnected')]);if(g!==generation)return;if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('Respuesta inválida');render(data,online===true||online==='true');}catch(e){if(g!==generation)return;status('Sin respuesta');notice('No se pudieron consultar los datos. Revisa conexión, servidor y token. Se conservan las últimas lecturas.',true);document.querySelectorAll('.card').forEach(c=>c.classList.add('stale'));for(const pin of ['v4','v6','v7'])badge(pin,'Sin datos actuales');}finally{if(g===generation)timer=setTimeout(()=>poll(g),2000);}}
+function reset(){generation++;clearTimeout(timer);alarm=false;for(const s of SENSORS){series[s.pin].values=[];series[s.pin].labels=[];el(s.pin).textContent='--';}redraw();return generation;}
+el('connectionForm').addEventListener('submit',e=>{e.preventDefault();const host=el('server').value.trim().replace(/^https:\/\//,'').replace(/\/$/,'');if(!/^(?:[a-z0-9-]+\.)*blynk\.cloud$/i.test(host)){notice('Escribe un servidor Blynk válido, por ejemplo blynk.cloud o ny3.blynk.cloud.',true);return;}const g=reset();server=host;token=el('tokenInput').value.trim();if(!token){notice('Introduce el token de tu dispositivo.');return;}status('Consultando…');poll(g);});
+el('demo').addEventListener('click',()=>{const g=reset();let t=0;function tick(){if(g!==generation)return;t++;render({v0:27+Math.sin(t/3),v1:70+4*Math.sin(t/4),v2:1013+Math.sin(t/5),v3:2*Math.sin(t/5),v4:Math.max(0,35+30*Math.sin(t/4)),v6:Math.max(0,4+3*Math.sin(t/6)),v7:Math.max(0,900+800*Math.sin(t/6))},true,true);timer=setTimeout(tick,2000);}tick();});
+window.addEventListener('resize',redraw);redraw();
 </script>
 </body>
 </html>
